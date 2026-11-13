@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Docs
+    url: https://docs.checkanysite.com
+    about: How to connect each client, every tool and every error.
+  - name: Status
+    url: https://status.checkanysite.com
+    about: Whether the API and the MCP server are working right now.
+  - name: Report a security problem
+    url: https://checkanysite.com/contact#security
+    about: Privately, by email, never in a public issue.

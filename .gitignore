@@ -1,0 +1,11 @@
+# The Python SDK's local environment, caches and build output (the repository's own .gitignore
+# covers the rest). Kept here so the source package, which carries this file, names only these.
+.venv/
+dist/
+build/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage

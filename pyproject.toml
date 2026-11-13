@@ -1,0 +1,100 @@
+[project]
+name = "checkanysite"
+dynamic = ["version"]
+description = "The official Python library for the CheckAnySite API: what is this website, with evidence."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "CheckAnySite", email = "hello@checkanysite.com" }]
+requires-python = ">=3.9"
+# Two dependencies only (ADR 0102): httpx for sync and async HTTP, pydantic for typed answers.
+dependencies = [
+    "httpx>=0.23.0,<1",
+    "pydantic>=2.5.0,<3",
+]
+keywords = ["checkanysite", "website", "ai", "tech stack", "dns", "api", "sdk"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://checkanysite.com"
+Documentation = "https://docs.checkanysite.com/sdks/python"
+Source = "https://github.com/checkanysite/checkanysite-python"
+Issues = "https://github.com/checkanysite/checkanysite-python/issues"
+Changelog = "https://github.com/checkanysite/checkanysite-python/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=5",
+    "respx>=0.22",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/checkanysite/_version.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "tests/",
+    "examples/",
+    "openapi.json",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/checkanysite"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "--cov --cov-report=term-missing --cov-fail-under=95"
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["checkanysite"]
+branch = true
+
+[tool.mypy]
+strict = true
+# The library, and the tests and examples as a user would write them.
+files = ["src", "tests", "examples"]
+plugins = ["pydantic.mypy"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+# Pydantic reads annotations at run time, and Python 3.9 can't evaluate `X | None` there.
+ignore = ["UP007", "UP045"]
+
+[tool.ruff.lint.per-file-ignores]
+# Generated code: its docstrings repeat the API's own descriptions, typographic quotes included.
+"src/checkanysite/models/_generated.py" = ["E501", "RUF001", "RUF002", "RUF003"]
