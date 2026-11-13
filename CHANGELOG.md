@@ -2,7 +2,9 @@
 
 All notable changes to the `checkanysite` Python library. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [semantic versioning](https://semver.org).
 
-## Unreleased
+## 0.1.2 (2026-11-13)
+
+The same client as 0.1.1, with links to where its source lives.
 
 - The package links its source on GitHub, [checkanysite/checkanysite-python](https://github.com/checkanysite/checkanysite-python), with its issues and this changelog, and its documentation to the library's own page.
 
